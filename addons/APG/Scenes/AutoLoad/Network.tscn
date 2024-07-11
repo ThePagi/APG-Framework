@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs61mu8ldtlcw"]
+
+[ext_resource type="Script" path="res://addons/APG/Scripts/AutoLoad/Network.gd" id="1_h02vx"]
+
+[node name="Network" type="Node"]
+script = ExtResource("1_h02vx")

@@ -1,4 +1,5 @@
-class_name NetworkSingleton
+#class_name NetworkSingleton
+class_name NetworkClass # workaround for not being able to access inner classes using the Autoload name
 extends Node
 ## An autoload script that handles everyting networking related in the APG plugin.
 ##
@@ -62,6 +63,8 @@ signal survey_received(msg)
 ## in [param user], the command name in [param cmd], and the command's parameters in [param params].
 signal chat_command_received(user, cmd, params)
 
+signal signal_msg_received(msg)
+
 ## Message types for events both sent to and received from the signaling server.
 enum MsgType {
 	DENY, ## General message type for a rejecting response to a request towards the signaling server.
@@ -108,10 +111,10 @@ enum PollTieConfig {
 }
 
 ## IP address of the signaling server.
-@export var signaling_ip: String = "ws://127.0.0.1:443"
+@export var signaling_ip: String = "wss://127.0.0.1/ws"
 ## Signaling server connection state.
 var state: SignalState = SignalState.NONE
-
+var auto_reconnect: bool = false
 ## Configuration for new client connections during an ongoing game.
 var client_config: ClientConnectionConfig
 ## The minimum number of active players required for a game to start or continue running.
@@ -166,7 +169,7 @@ func _ready():
 	_poll_timer.one_shot = true
 	add_child(_poll_timer, true)
 	
-	_connect_to_signaling()
+	#connect_to_signaling()
 
 
 func _process(_delta: float):
@@ -187,7 +190,9 @@ func _process(_delta: float):
 						to_log += "..."
 				else:
 					to_log = msg["msg"]
+
 			print(name, ": Signal server (", MsgType.keys()[msg["type"]], "): ", to_log)
+			signal_msg_received.emit(MsgType.keys()[msg["type"]] + ": " + msg["msg"])
 			_manage_signal_msg(msg)
 	if _ws_state == new_ws_state:
 		return
@@ -195,7 +200,7 @@ func _process(_delta: float):
 	
 	match _ws_state:
 		WebSocketPeer.STATE_CONNECTING:
-			print(name, ": Connecting to signal server...")
+			print(name, ": Connecting to signal server ", signaling_ip)
 		WebSocketPeer.STATE_CLOSING:
 			print(name, ": Disconnecting from signal server...")
 		WebSocketPeer.STATE_CLOSED:
@@ -210,7 +215,8 @@ func _process(_delta: float):
 			print(name, ": Disconnected from signal server: ",
 				_ws_client.get_close_code(), ", ", _ws_client.get_close_reason())
 			await get_tree().create_timer(1.0).timeout
-			_connect_to_signaling()
+			if auto_reconnect:
+				connect_to_signaling()
 		WebSocketPeer.STATE_OPEN:
 			print(name, ": Connected to signal server.")
 			signaling_connected.emit()
@@ -287,22 +293,33 @@ func leave_room():
 	multiplayer.multiplayer_peer = null
 
 
-## Sends the event in [param event] with optional details in [param detail] to the signaling server.
-func send_event(event: String, detail = null):
-	print("Sending event: ", event, ", detail:", detail)
-	
-	match event:
-		"minigame_start":
-			room_data.game_ongoing = true
-			current_poll = null
-		"minigame_end":
-			room_data.game_ongoing = false
-			room_data.active_players = room_data.player_queue
-			room_data.inactive_players.clear()
-			room_data.player_queue.clear()
-	
-	if detail:
-		event = event + "%" + detail
+func start_game(game_name: String, detail: String = ""):
+	room_data.game_ongoing = true
+	current_poll = null
+	var event = {
+		"event": "game_start",
+		"detail": game_name
+	}
+	send_event(event)
+
+func end_game(detail: String = ""):
+	room_data.game_ongoing = false
+	room_data.active_players = room_data.player_queue
+	room_data.inactive_players.clear()
+	room_data.player_queue.clear()
+	var event = {
+		"event": "game_end",
+		"detail": detail
+	}
+	send_event(event)
+
+func send_event_str(event: String, detail: String = ""):
+	send_event({"event": event, "detail": detail})
+
+## Sends the event in [param event] to the signaling server.
+func send_event(event_dic: Dictionary):
+	var event = JSON.stringify(event_dic)
+	print("Sending event: ", event)
 	send_msg_to_signal(MsgType.EVENT, event)
 
 
@@ -371,10 +388,12 @@ func _get_peer(id: int) -> WebRTCPeerConnection:
 	return _peers.get_peer(id)["connection"] as WebRTCPeerConnection
 
 
-func _connect_to_signaling():
-	_ws_client.close(1000, "Reconnecting")
-	_ws_client.connect_to_url(signaling_ip, TLSOptions.client())
+func connect_to_signaling():
+	disconnect_from_signaling()
+	_ws_client.connect_to_url(signaling_ip, TLSOptions.client_unsafe())
 
+func disconnect_from_signaling():
+	_ws_client.close(1000, "Reconnecting")
 
 func _manage_signal_msg(msg):
 	match msg["type"] as MsgType:
@@ -497,9 +516,11 @@ func _manage_signal_msg(msg):
 			survey_received.emit(msg["msg"])
 		MsgType.CHAT_COMMAND:
 			var parts: Array = msg["msg"].split('%', false)
-			chat_command_received.emit(parts[0], parts[1], parts[2])
-
-
+			if len(parts) > 2:
+				chat_command_received.emit(parts[0], parts[1], parts.slice(2))
+			else:
+				chat_command_received.emit(parts[0], parts[1], [])
+			
 @rpc("any_peer")
 func _send_username(username: String):
 	if not multiplayer.is_server():

@@ -1,0 +1,1 @@
+{"LevelTimerLengthBase":{"type":1,"default":180},"LevelTimerLengthPerPlayer":{"type":1,"default":30},"SheepCountBase":{"type":0,"default":0},"SheepCountPerPlayer":{"type":0,"default":1},"LevelWidthBase":{"type":0,"default":20},"LevelWidthPerPlayer":{"type":0,"default":20},"LevelHeightBase":{"type":0,"default":10},"LevelHeightPerPlayer":{"type":0,"default":10}}
