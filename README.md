@@ -1,7 +1,7 @@
 
 
 
-The original code is based on Master thesis:
+The original code is based on a Master thesis by:
 
 APG Framework © 2023 by Ondřej Studený is licensed under Creative Commons
 Attribution 4.0 International. To view a copy of this license, visit
