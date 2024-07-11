@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcfge37ust86"]
+
+[ext_resource type="Script" path="res://addons/APG/Scripts/Surveys/OpenQuestion.gd" id="1_c8vdj"]
+[ext_resource type="Theme" uid="uid://rtap3v7wa6cs" path="res://addons/APG/Resources/Themes/DefaultSurveyUI.tres" id="1_lsw1t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wgv2"]
+line_spacing = 6.0
+font_size = 18
+
+[node name="OpenQuestion" type="VBoxContainer" node_paths=PackedStringArray("input", "question_label")]
+theme = ExtResource("1_lsw1t")
+script = ExtResource("1_c8vdj")
+input = NodePath("TextEdit")
+question_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Survey question?"
+label_settings = SubResource("LabelSettings_3wgv2")
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Type your answer..."
+wrap_mode = 1
+scroll_fit_content_height = true

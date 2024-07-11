@@ -1,0 +1,117 @@
+[gd_resource type="Theme" load_steps=21 format=3 uid="uid://rtap3v7wa6cs"]
+
+[ext_resource type="FontFile" uid="uid://do7hkam2g8li0" path="res://addons/APG/Resources/Fonts/NotoSans-Bold.ttf" id="1_sytd7"]
+[ext_resource type="StyleBox" uid="uid://lr5h3m3bddfi" path="res://addons/APG/Resources/Styles/SurveyButtonNormal.tres" id="2_jpqhn"]
+[ext_resource type="StyleBox" uid="uid://crfde0g0vyta7" path="res://addons/APG/Resources/Styles/SurveyButtonHover.tres" id="3_c6pth"]
+[ext_resource type="StyleBox" uid="uid://b2qe1e7scd1vb" path="res://addons/APG/Resources/Styles/SurveyCheckBoxHover.tres" id="4_4u520"]
+[ext_resource type="FontFile" uid="uid://17vwv4irwcv6" path="res://addons/APG/Resources/Fonts/NotoSans-Regular.ttf" id="4_dc1hi"]
+[ext_resource type="FontFile" uid="uid://dmkol1kuovjj6" path="res://addons/APG/Resources/Fonts/RobotoMono-Regular.ttf" id="5_3tdy6"]
+[ext_resource type="StyleBox" uid="uid://dcltwykgthkkn" path="res://addons/APG/Resources/Styles/SurveyCheckBoxNormal.tres" id="5_6cql7"]
+[ext_resource type="Texture2D" uid="uid://dkebjl8yfa7km" path="res://addons/APG/Resources/Images/Surveys/InputField_frame_activity.png" id="6_o1sl3"]
+[ext_resource type="Texture2D" uid="uid://b43e1dvxpdryh" path="res://addons/APG/Resources/Images/Surveys/frame_stageframe_00_s1.png" id="7_j3nod"]
+[ext_resource type="FontFile" uid="uid://c1nmbqpxws4ic" path="res://addons/APG/Resources/Fonts/NotoSans-Italic.ttf" id="8_8bomh"]
+[ext_resource type="StyleBox" uid="uid://f2heyjdg8ok5" path="res://addons/APG/Resources/Styles/SurveyTextEdit.tres" id="11_c4ags"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ygmq1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryc8l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5tq6j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eaa3j"]
+texture = ExtResource("6_o1sl3")
+texture_margin_left = 16.0
+texture_margin_right = 16.0
+expand_margin_left = 4.0
+expand_margin_top = 8.0
+expand_margin_right = 16.0
+expand_margin_bottom = 8.0
+modulate_color = Color(0.784314, 0.784314, 0.784314, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ltwde"]
+texture = ExtResource("6_o1sl3")
+texture_margin_left = 16.0
+texture_margin_right = 16.0
+expand_margin_top = 4.0
+expand_margin_right = 16.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v2a0u"]
+texture = ExtResource("6_o1sl3")
+texture_margin_left = 16.0
+texture_margin_right = 16.0
+expand_margin_right = 8.0
+modulate_color = Color(1, 0.647059, 0.647059, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ybjl8"]
+texture = ExtResource("7_j3nod")
+texture_margin_left = 70.0
+texture_margin_top = 32.0
+texture_margin_right = 80.0
+texture_margin_bottom = 54.0
+expand_margin_left = 16.0
+expand_margin_right = 16.0
+expand_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cfk3k"]
+texture = ExtResource("7_j3nod")
+texture_margin_left = 42.0
+texture_margin_top = 26.0
+texture_margin_right = 42.0
+texture_margin_bottom = 54.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ut0hm"]
+
+[resource]
+default_font = ExtResource("4_dc1hi")
+Button/colors/font_color = Color(0.0666667, 0.0588235, 0.105882, 1)
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_sytd7")
+Button/styles/focus = ExtResource("2_jpqhn")
+Button/styles/hover = ExtResource("3_c6pth")
+Button/styles/normal = ExtResource("2_jpqhn")
+Button/styles/pressed = ExtResource("2_jpqhn")
+CheckBox/colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
+CheckBox/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+CheckBox/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+CheckBox/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_pressed_color = Color(1, 1, 1, 1)
+CheckBox/constants/check_v_offset = -2
+CheckBox/font_sizes/font_size = 15
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_ygmq1")
+CheckBox/styles/hover = ExtResource("4_4u520")
+CheckBox/styles/hover_pressed = ExtResource("4_4u520")
+CheckBox/styles/normal = ExtResource("5_6cql7")
+CheckBox/styles/pressed = ExtResource("5_6cql7")
+HSeparator/constants/separation = 4
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_ryc8l")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("4_dc1hi")
+Label/styles/normal = SubResource("StyleBoxEmpty_5tq6j")
+LineEdit/colors/font_disabled_color = Color(0.443137, 0.443137, 0.443137, 1)
+LineEdit/constants/minimum_character_width = 7
+LineEdit/font_sizes/font_size = 36
+LineEdit/fonts/font = ExtResource("5_3tdy6")
+LineEdit/styles/focus = SubResource("StyleBoxTexture_eaa3j")
+LineEdit/styles/normal = SubResource("StyleBoxTexture_ltwde")
+LineEdit/styles/read_only = SubResource("StyleBoxTexture_v2a0u")
+LinkButton/colors/font_disabled_color = Color(0.611765, 0.239216, 0.254902, 0.215686)
+Panel/styles/panel = SubResource("StyleBoxTexture_ybjl8")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_cfk3k")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/fonts/italics_font = ExtResource("8_8bomh")
+RichTextLabel/fonts/normal_font = ExtResource("4_dc1hi")
+TextEdit/constants/line_spacing = 2
+TextEdit/font_sizes/font_size = 15
+TextEdit/styles/focus = ExtResource("11_c4ags")
+TextEdit/styles/normal = ExtResource("11_c4ags")
+VBoxContainer/constants/separation = 4
+VSeparator/styles/separator = SubResource("StyleBoxEmpty_ut0hm")

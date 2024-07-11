@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://di4ife55krud5"]
+
+[ext_resource type="Script" path="res://addons/APG/Scripts/PresetSettingConfig.gd" id="1_1x1t4"]
+[ext_resource type="StyleBox" uid="uid://c6lpwggcxv2ig" path="res://addons/APG/Resources/Styles/ListItemDefault.tres" id="1_7gx2d"]
+[ext_resource type="Texture2D" uid="uid://cythuy02r4tte" path="res://addons/APG/Resources/Images/TripleBar.svg" id="2_47yo4"]
+[ext_resource type="Texture2D" uid="uid://bj1uo6ij37hyj" path="res://addons/APG/Resources/Images/Remove.svg" id="3_8yxik"]
+[ext_resource type="Script" path="res://addons/APG/Scripts/RearrangeButton.gd" id="4_113gc"]
+
+[node name="PresetSettingConfig" type="PanelContainer"]
+offset_right = 460.0
+offset_bottom = 40.0
+focus_mode = 1
+theme_override_styles/panel = ExtResource("1_7gx2d")
+script = ExtResource("1_1x1t4")
+
+[node name="Columns" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Rearrange" type="Button" parent="Columns"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("2_47yo4")
+flat = true
+script = ExtResource("4_113gc")
+
+[node name="FieldNames" type="VBoxContainer" parent="Columns"]
+layout_mode = 2
+
+[node name="Setting" type="Label" parent="Columns/FieldNames"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "Setting"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Columns/FieldNames"]
+visible = false
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "Value"
+vertical_alignment = 1
+
+[node name="Fields" type="VBoxContainer" parent="Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Setting" type="OptionButton" parent="Columns/Fields"]
+layout_mode = 2
+item_count = 1
+popup/item_0/text = "No settings available"
+popup/item_0/id = 0
+popup/item_0/disabled = true
+
+[node name="Value" type="Control" parent="Columns/Fields"]
+visible = false
+layout_mode = 2
+
+[node name="Validators" type="VBoxContainer" parent="Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Setting" type="Label" parent="Columns/Validators"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "An option must be selected."
+
+[node name="Value" type="Label" parent="Columns/Validators"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Invalid value of selected type."
+
+[node name="Delete" type="Button" parent="Columns"]
+layout_mode = 2
+icon = ExtResource("3_8yxik")
+flat = true
+
+[connection signal="button_down" from="Columns/Rearrange" to="." method="_on_rearrange_button_down"]
+[connection signal="item_selected" from="Columns/Fields/Setting" to="." method="_on_setting_item_selected"]
+[connection signal="button_up" from="Columns/Delete" to="." method="_on_delete_button_up"]

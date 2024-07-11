@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3j578cdobgfq"]
+
+[ext_resource type="Script" path="res://addons/APG/Scripts/SettingsList.gd" id="1_2c07n"]
+[ext_resource type="Texture2D" uid="uid://dww3wexpairfh" path="res://addons/APG/Resources/Images/Forward.svg" id="2_irr7q"]
+[ext_resource type="PackedScene" uid="uid://dp7qsll81axjm" path="res://addons/APG/Scenes/ListSpace.tscn" id="3_hj8hg"]
+[ext_resource type="Texture2D" uid="uid://coqjamrayp67r" path="res://addons/APG/Resources/Images/Add.svg" id="4_u3lrl"]
+[ext_resource type="Texture2D" uid="uid://boxtfjmvbo14u" path="res://addons/APG/Resources/Images/Save.svg" id="5_1s10j"]
+
+[node name="SettingsList" type="VBoxContainer"]
+script = ExtResource("1_2c07n")
+
+[node name="Collapse" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Game Settings"
+icon = ExtResource("2_irr7q")
+
+[node name="List" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ListSpace" parent="List" instance=ExtResource("3_hj8hg")]
+layout_mode = 2
+
+[node name="AddElement" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Add Element"
+icon = ExtResource("4_u3lrl")
+
+[node name="Save" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save Settings"
+icon = ExtResource("5_1s10j")
+
+[connection signal="button_up" from="Collapse" to="." method="_on_collapse_button_up"]
+[connection signal="button_up" from="AddElement" to="." method="_on_add_element_button_up"]
+[connection signal="button_up" from="Save" to="." method="_on_save_button_up"]

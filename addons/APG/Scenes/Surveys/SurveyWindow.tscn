@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc8k0ocqlf4cy"]
+
+[ext_resource type="Theme" uid="uid://rtap3v7wa6cs" path="res://addons/APG/Resources/Themes/DefaultSurveyUI.tres" id="1_jydad"]
+[ext_resource type="Script" path="res://addons/APG/Scripts/Surveys/SurveyWindow.gd" id="2_i308e"]
+[ext_resource type="FontFile" uid="uid://do7hkam2g8li0" path="res://addons/APG/Resources/Fonts/NotoSans-Bold.ttf" id="4_2jk3k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8nby5"]
+bg_color = Color(0.380392, 0.258824, 0.717647, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_hvt1d"]
+font = ExtResource("4_2jk3k")
+font_size = 32
+font_color = Color(0.819608, 0.870588, 0.870588, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qxpi8"]
+font_color = Color(0.858824, 0.517647, 0.517647, 1)
+
+[node name="SurveyWindow" type="CanvasLayer" node_paths=PackedStringArray("questions_container", "submit_button", "error_label")]
+layer = 20
+script = ExtResource("2_i308e")
+questions_container = NodePath("Panel/MarginContainer/VBoxContainer/ScrollContainer/Questions")
+submit_button = NodePath("Panel/MarginContainer/VBoxContainer/Button")
+error_label = NodePath("Panel/MarginContainer/VBoxContainer/Error")
+
+[node name="Darken" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(600, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -305.0
+offset_right = 300.0
+offset_bottom = 295.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("1_jydad")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = -20
+theme_override_constants/margin_top = -50
+theme_override_constants/margin_right = -20
+theme_override_constants/margin_bottom = -20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_8nby5")
+text = "Survey"
+label_settings = SubResource("LabelSettings_hvt1d")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="Questions" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Error" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_qxpi8")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Submit"

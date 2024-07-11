@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://c28tut8agbi1h"]
+
+[ext_resource type="PackedScene" uid="uid://b3j578cdobgfq" path="res://addons/APG/Scenes/SettingsList.tscn" id="1_nmhbh"]
+
+[node name="APG Settings" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+horizontal_scroll_mode = 0
+
+[node name="Settings" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="GameSettings" parent="Settings" instance=ExtResource("1_nmhbh")]
+layout_mode = 2
+
+[node name="UserSettings" parent="Settings" instance=ExtResource("1_nmhbh")]
+layout_mode = 2
+settings_type = 1

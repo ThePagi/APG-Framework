@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://beuycy0b3d67y"]
+
+[ext_resource type="Theme" uid="uid://rtap3v7wa6cs" path="res://addons/APG/Resources/Themes/DefaultSurveyUI.tres" id="1_smuu6"]
+[ext_resource type="Script" path="res://addons/APG/Scripts/Surveys/NumericQuestion.gd" id="2_6t7pj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wgv2"]
+line_spacing = 6.0
+font_size = 18
+
+[node name="NumericQuestion" type="VBoxContainer" node_paths=PackedStringArray("input", "question_label")]
+theme = ExtResource("1_smuu6")
+script = ExtResource("2_6t7pj")
+input = NodePath("SpinBox")
+question_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Survey question?"
+label_settings = SubResource("LabelSettings_3wgv2")
+horizontal_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 2
+rounded = true
+
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]

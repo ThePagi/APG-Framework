@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxmxqm4ffh015"]
+
+[ext_resource type="Script" path="res://addons/APG/Scripts/Surveys/SelectOneQuestion.gd" id="1_f46d4"]
+[ext_resource type="PackedScene" uid="uid://64h52cbjfchi" path="res://addons/APG/Scenes/Surveys/CheckBox.tscn" id="2_hp5ct"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wgv2"]
+line_spacing = 6.0
+font_size = 18
+shadow_color = Color(0, 0, 0, 0.423529)
+
+[node name="SelectOneQuestion" type="VBoxContainer" node_paths=PackedStringArray("h_parent", "v_parent", "question_label")]
+theme_override_constants/separation = 0
+script = ExtResource("1_f46d4")
+checkbox_prefab = ExtResource("2_hp5ct")
+h_parent = NodePath("HBoxContainer")
+v_parent = NodePath(".")
+question_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Survey question?"
+label_settings = SubResource("LabelSettings_3wgv2")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1

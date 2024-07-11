@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://64h52cbjfchi"]
+
+[ext_resource type="Theme" uid="uid://rtap3v7wa6cs" path="res://addons/APG/Resources/Themes/DefaultSurveyUI.tres" id="1_ty3aa"]
+
+[node name="CheckBox" type="CheckBox"]
+size_flags_horizontal = 3
+theme = ExtResource("1_ty3aa")
+text = "A Choice"

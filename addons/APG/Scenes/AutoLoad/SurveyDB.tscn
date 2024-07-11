@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jman0w8xq0yt"]
+
+[ext_resource type="Script" path="res://addons/APG/Scripts/AutoLoad/SurveyDB.gd" id="1_j2o3a"]
+
+[node name="SurveyDB" type="Node"]
+script = ExtResource("1_j2o3a")
