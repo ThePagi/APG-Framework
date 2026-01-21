@@ -38,7 +38,3 @@ func _try_submit():
 			return
 		answers.append({question.question_type : question.get_answer()})
 	on_submit.emit([uid, answers])
-
-
-func _on_discard_pressed() -> void:
-	queue_free()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cc8k0ocqlf4cy"]
 
 [ext_resource type="Theme" uid="uid://rtap3v7wa6cs" path="res://addons/APG/Resources/Themes/DefaultSurveyUI.tres" id="1_jydad"]
-[ext_resource type="Script" path="res://addons/APG/Scripts/Surveys/SurveyWindow.gd" id="2_i308e"]
+[ext_resource type="Script" uid="uid://rgj551aavfex" path="res://addons/APG/Scripts/Surveys/SurveyWindow.gd" id="2_i308e"]
 [ext_resource type="FontFile" uid="uid://do7hkam2g8li0" path="res://addons/APG/Resources/Fonts/NotoSans-Bold.ttf" id="4_2jk3k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8nby5"]
@@ -23,7 +23,7 @@ font_color = Color(0.858824, 0.517647, 0.517647, 1)
 layer = 20
 script = ExtResource("2_i308e")
 questions_container = NodePath("Panel/MarginContainer/VBoxContainer/ScrollContainer/Questions")
-submit_button = NodePath("Panel/MarginContainer/VBoxContainer/Button")
+submit_button = NodePath("Panel/MarginContainer/VBoxContainer/HBoxContainer/Submit")
 error_label = NodePath("Panel/MarginContainer/VBoxContainer/Error")
 
 [node name="Darken" type="ColorRect" parent="."]
@@ -90,8 +90,23 @@ layout_mode = 2
 label_settings = SubResource("LabelSettings_qxpi8")
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Discard" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.4, 0.09019608, 0.16078432, 1)
+text = "Discard
+"
+
+[node name="Submit" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Submit"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/Discard" to="." method="_on_discard_pressed"]

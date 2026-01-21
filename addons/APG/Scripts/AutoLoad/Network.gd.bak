@@ -110,10 +110,8 @@ enum PollTieConfig {
 	SECOND_ROUND, ## Another poll starts containing only the poll options with maximum votes. If another tie occurs, behaves like [constant RANDOM_WINNER].
 }
 
-var debug_run: bool = false
-
 ## IP address of the signaling server.
-@export var signaling_ip: String = "wss://apg.fi.muni.cz/ws"
+@export var signaling_ip: String = "wss://127.0.0.1/ws"
 ## Signaling server connection state.
 var state: SignalState = SignalState.NONE
 var auto_reconnect: bool = false
